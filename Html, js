@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Márk Lottó szimulátor</title>
+        <script src="libaries/p5.js" type="
+        text/javascript"></script>
+        <script src="libaries/p5.dom.js" type="
+        text/javascript"></script>
+        <script src="libaries/p5.sound.js" type="
+        text/javascript"></script>
+        <script src="sketch.js" type="text/javascript"></script>
+        <style>
+            body {
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <boody>
+        <h1>Márk Lottó szimulátor</h1>
+        <p>
+             Ez a szimulátor azt feltételezi, hogy minden este 10 pár jegy áll rendelkezésre, és 50 000 ember vesz részt minden lottón.
+        </p>
+
+        <p>
+            5000-ben van esélyed a nyerésre 
+        </p>
+            Ahhoz, hogy legalább egyszer 99%-os esélyed legyen a lottón nyerni, ~23 000-et kell játszanod.
+        <p>
+            <button id="start">kezdj el részt venni a lottón</button>
+        </p>
+        <p>
+           <span id="total">0</span>játszottál eddig
+        </p>
+
+        <p id = "results">
+
+        </p>
+    </boody>
+</html>
+
+
+var prob = 50;
+var button;
+
+var started = false;
+var total = 0;
+
+function setup() {
+    noCanvas();
+    button = select('#start');
+    button.mousePressed(startLottery);
+    noLoop();
+}
+
+function startLottery() {
+    started = true;
+    total = 0;
+    loop();
+}
+
+function draw() {
+
+    if (started) {
+        var r = floor(random(prob));
+
+        var results = select('#results');
+
+        if (r == 1) {
+            results.html('nyertél!');
+            //console.log('nyertes lottó');
+        }  else {
+            results.htm('Próbáld újra');
+            //console.log('vesztes lottó');
+        }
+        total++;
+
+        select('#total').html(total);
+    }
+
+}
